@@ -1,0 +1,86 @@
+- name: Run specified tasks on current platform
+  include: "{{ ansible_os_family }}.yml"
+
+- name: Check whether anyenv is installed
+  stat: path="{{ anyenv_home }}/.anyenv"
+  register: stat_anyenv
+  changed_when: no
+
+#- block:
+#  - name: Clone anyenv
+#    git:
+#      repo: 'https://github.com/riywo/anyenv'
+#      dest: '{{ anyenv_home }}/.anyenv'
+##    become: yes
+#
+#  - name: ''
+#    git:
+#      repo: https://github.com/znz/anyenv-update.git
+#      dest: /opt/anyenv/plugins/anyenv-update
+##    become: yes
+#
+##  - name: Set owner/group for anyenv
+##    file:
+##      path: '{{ anyenv_home }}/.anyenv'
+##      owner: '{{ anyenv_owner }}'
+##      group: '{{ anyenv_group }}'
+##      recurse: yes
+##    become: yes
+#
+#  - name: Add profile settings for anyenv
+#    lineinfile:
+#      dest: '{{ anyenv_home }}/{{ anyenv_profile }}'
+#      line: '{{ item }}'
+#      owner: '{{ anyenv_owner }}'
+#      group: '{{ anyenv_group }}'
+#      create: yes
+#    with_items:
+#      - 'export PATH="$HOME/.anyenv/bin:$PATH"'
+#      - 'eval "$(anyenv init -)"'
+#    become: yes
+#
+#  when: not stat_anyenv.stat.exists
+#
+#- name: 'Package : Install packages'
+#  apt:
+#    name: git
+#  become: yes
+#
+#- name: ''
+#  git:
+#    repo: https://github.com/riywo/anyenv
+#    dest: /opt/anyenv
+#  become: yes
+
+
+#- name: 'debug'
+#  debug:
+#    var: '{{ ANSIBLE_
+
+
+#$ echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> ~/.profile
+#$ echo 'eval "$(anyenv init -)"' >> ~/.profile
+
+# pyenv
+#$ anyenv install pyenv
+#$ exec $SHELL -l
+#$ git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+#$ sudo apt install -y libbz2-dev libreadline-dev libsqlite3-dev libssl-dev
+#$ pyenv install 3.6.5
+#$ pyenv virtualenv 3.6.5 rds
+
+
+# RDS
+#$ sudo apt install libffi-dev ffmpeg
+
+
+
+
+#- name: 'Hostname : Change /etc/hosts'
+#  lineinfile:
+#    dest: /etc/hosts
+#    line: "127.0.1.1\t{{ RASPBERRYPI_HOSTNAME }}"
+#    regexp: ^127.0.1.1.*$
+#  become: yes
+
+
