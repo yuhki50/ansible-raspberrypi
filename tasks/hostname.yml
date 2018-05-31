@@ -1,20 +1,11 @@
-- name: 'Hostname : Change /etc/hostname'
-  lineinfile:
-    dest: /etc/hostname
-    line: '{{ RASPBERRYPI_HOSTNAME }}'
-    regexp: ^.*$
-  become: yes
-  register: change_etc_hostname
-
 - name: 'Hostname : Change /etc/hosts'
   lineinfile:
     dest: /etc/hosts
     line: "127.0.1.1\t{{ RASPBERRYPI_HOSTNAME }}"
     regexp: ^127.0.1.1.*$
   become: yes
-  register: change_etc_hosts
 
-- name: 'Hostname : Apply hostname'
-  command: "/bin/hostname {{ RASPBERRYPI_HOSTNAME }}"
+- name: 'Hostname : Apply'
+  hostname:
+    name: '{{ RASPBERRYPI_HOSTNAME }}'
   become: yes
-  when: change_etc_hostname is changed or change_etc_hosts is changed
