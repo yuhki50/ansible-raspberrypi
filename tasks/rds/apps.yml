@@ -1,61 +1,55 @@
-- name: Run specified tasks on current platform
-  include: "{{ ansible_os_family }}.yml"
+#- name: Check whether anyenv is installed
+#  stat:
+#    path: '/opt/anyenv'
+#  register: st_anyenv
+#  changed_when: no
 
-- name: Check whether anyenv is installed
-  stat: path="{{ anyenv_home }}/.anyenv"
-  register: stat_anyenv
-  changed_when: no
+- block:
+  - name: 'Anyenv : Install packages'
+    apt:
+      name: git
+      autoclean: yes
+    become: yes
 
-#- block:
-#  - name: Clone anyenv
-#    git:
-#      repo: 'https://github.com/riywo/anyenv'
-#      dest: '{{ anyenv_home }}/.anyenv'
-##    become: yes
-#
-#  - name: ''
-#    git:
-#      repo: https://github.com/znz/anyenv-update.git
-#      dest: /opt/anyenv/plugins/anyenv-update
-##    become: yes
-#
-##  - name: Set owner/group for anyenv
-##    file:
-##      path: '{{ anyenv_home }}/.anyenv'
-##      owner: '{{ anyenv_owner }}'
-##      group: '{{ anyenv_group }}'
-##      recurse: yes
-##    become: yes
-#
-#  - name: Add profile settings for anyenv
-#    lineinfile:
-#      dest: '{{ anyenv_home }}/{{ anyenv_profile }}'
-#      line: '{{ item }}'
-#      owner: '{{ anyenv_owner }}'
-#      group: '{{ anyenv_group }}'
-#      create: yes
-#    with_items:
-#      - 'export PATH="$HOME/.anyenv/bin:$PATH"'
-#      - 'eval "$(anyenv init -)"'
+  - name: 'Anyenv : Clone anyenv'
+    git:
+      repo: 'https://github.com/riywo/anyenv'
+      dest: '/opt/anyenv'
+    become: yes
+
+#  - name: Set owner/group for anyenv
+#    file:
+#      path: '{{ ANYENV_PREFIX }}/anyenv'
+#      owner: '{{ ANYENV_OWNER }}'
+#      group: '{{ ANYENV_GROUP }}'
+#      recurse: yes
 #    become: yes
-#
-#  when: not stat_anyenv.stat.exists
-#
-#- name: 'Package : Install packages'
-#  apt:
-#    name: git
-#  become: yes
-#
-#- name: ''
-#  git:
-#    repo: https://github.com/riywo/anyenv
-#    dest: /opt/anyenv
-#  become: yes
 
+  - name: 'Anyenv : Add profile settings for anyenv'
+    lineinfile:
+      dest: '/home/pi/.profile'
+      line: '{{ item }}'
+      owner: 'pi'
+      group: 'pi'
+      create: yes
+    with_items:
+      - 'export PATH="{{ ANYENV_PREFIX }}/anyenv/bin:$PATH"'
+      - 'eval "$(anyenv init -)"'
+    become: yes
 
-#- name: 'debug'
-#  debug:
-#    var: '{{ ANSIBLE_
+  - name: 'Anyenv : Add profile settings for anyenv'
+    lineinfile:
+      dest: '/etc/skel/.profile'
+      line: '{{ item }}'
+      owner: 'root'
+      group: 'root'
+      create: yes
+    with_items:
+      - 'export PATH="{{ ANYENV_PREFIX }}/anyenv/bin:$PATH"'
+      - 'eval "$(anyenv init -)"'
+    become: yes
+
+#  when: not st_anyenv.stat.exists
 
 
 #$ echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> ~/.profile
@@ -82,5 +76,3 @@
 #    line: "127.0.1.1\t{{ RASPBERRYPI_HOSTNAME }}"
 #    regexp: ^127.0.1.1.*$
 #  become: yes
-
-

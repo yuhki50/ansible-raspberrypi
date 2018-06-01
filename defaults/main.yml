@@ -6,27 +6,6 @@ RASPBERRYPI_HOSTNAME: raspberrypi
 # Compose key: No compose key
 # Use Control+Alt+Backspace to terminate the X server?: No
 RASPBERRYPI_KEYBOARD_LAYOUT:
-- {key: keyboard-configuration/altgr, value: The default for the keyboard layout, vtype: select }
-- {key: keyboard-configuration/compose, value: No compose key, vtype: select }
-- {key: keyboard-configuration/ctrl_alt_bksp, value: 'false', vtype: boolean }
-- {key: keyboard-configuration/layout, value: Japanese, vtype: select }
-- {key: keyboard-configuration/layoutcode, value: jp, vtype: select }
-- {key: keyboard-configuration/model, value: Generic 105-key (Intl) PC, vtype: select }
-- {key: keyboard-configuration/modelcode, value: pc105, vtype: select }
-- {key: keyboard-configuration/optionscode, value: '', vtype: select }
-- {key: keyboard-configuration/other, value: '', vtype: select }
-- {key: keyboard-configuration/store_defaults_in_debconf_db, value: 'true', vtype: boolean }
-- {key: keyboard-configuration/switch, value: No temporary switch, vtype: select }
-- {key: keyboard-configuration/toggle, value: No toggling, vtype: select }
-- {key: keyboard-configuration/unsupported_config_layout, value: 'true', vtype: boolean }
-- {key: keyboard-configuration/unsupported_config_options, value: 'true', vtype: boolean }
-- {key: keyboard-configuration/unsupported_layout, value: 'true', vtype: boolean }
-- {key: keyboard-configuration/unsupported_options, value: 'true', vtype: boolean }
-- {key: keyboard-configuration/variant, value: Japanese - Japanese (OADG 109A), vtype: select }
-- {key: keyboard-configuration/variantcode, value: OADG109A, vtype: select }
-- {key: keyboard-configuration/xkb-keymap, value: jp(OADG109A), vtype: select }
-
-RASPBERRYPI_KEYBOARD_LAYOUT2:
 - {line: 'XKBMODEL="pc105"', regexp: '^#?\s*XKBMODEL' }
 - {line: 'XKBLAYOUT="jp"', regexp: '^#?\s*XKBLAYOUT' }
 - {line: 'XKBVARIANT="OADG109A"', regexp: '^#?\s*XKBVARIANT' }
@@ -45,14 +24,18 @@ RASPBERRYPI_LOCALES:
 RASPBERRYPI_TIMEZONE: Asia/Tokyo
 
 
-RASPBERRYPI_PI_WIFI: raspberry
+#RASPBERRYPI_PI_WIFI: raspberry
 
 
-RASPBERRYPI_PI_USER_PASSWORD: raspberry
-RASPBERRYPI_CAMERA_ENABLE: 0  # 0:Yes / 1:No
-RASPBERRYPI_VNC_ENABLE: 0  # 0:Yes / 1:No
-RASPBERRYPI_SPI_ENABLE: 0  # 0:Yes / 1:No
-RASPBERRYPI_I2C_ENABLE: 0  # 0:Yes / 1:No
-RASPBERRYPI_SERIAL_ENABLE: 0  # 0:Yes / 1:No
-RASPBERRYPI_1WIRE_ENABLE: 0  # 0:Yes / 1:No
-RASPBERRYPI_RGPIO_ENABLE: 1  # 0:Yes / 1:No
+#RASPBERRYPI_PI_USER_PASSWORD: raspberry
+#RASPBERRYPI_CAMERA_ENABLE: 0  # 0:Yes / 1:No
+#RASPBERRYPI_VNC_ENABLE: 0  # 0:Yes / 1:No
+#RASPBERRYPI_SPI_ENABLE: 0  # 0:Yes / 1:No
+#RASPBERRYPI_I2C_ENABLE: 0  # 0:Yes / 1:No
+#RASPBERRYPI_SERIAL_ENABLE: 0  # 0:Yes / 1:No
+#RASPBERRYPI_1WIRE_ENABLE: 0  # 0:Yes / 1:No
+#RASPBERRYPI_RGPIO_ENABLE: 1  # 0:Yes / 1:No
+
+
+
+ANYENV_PREFIX: /opt
